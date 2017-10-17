@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content">
+  <div class="container">
+    <form class="settig-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <fieldset class="module aligned wide">
+
+        <div class="form-row field-sns_kind">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_sns_kind">SNS:</label>
+                        
+                            <select name="sns_kind" id="id_sns_kind" required>
+                              <option value="in">인스타그램</option>
+                              <option value="fb">페이스</option>
+                            </select>
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-number">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_number">크롤링 개수:</label>
+                        
+                            <input type="text" name="number" class="vTextField" maxlength="150" autofocus required id="id_number" />
+                        
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-crawl_type">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_crawl_type">크롤링 타입:</label>
+                        
+                            <select name="crawl_type" id="id_crawl_type" required>
+                              <option value="all">all</option>
+                              <option value="tags">tags</option>
+                            </select>
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-env">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_env">실행 환경:</label>
+                        
+                            <select name="env" id="id_env" required>
+                              <option value="pro">pro</option>
+                              <option value="dev">dev</option>
+                              <option value="test">test</option>
+                            </select>
+                </div>
+            
+        </div>
+
+        <div class="form-row field-random">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_random">랜덤 감성 해시태그:</label>
+
+                          <input type="checkbox" name="random" value="r" id="id_random">
+                        
+                </div>
+            
+        </div>
+
+        <div class="form-row field-query">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_query">해시태그:</label>
+                        
+                            <input type="text" name="query" class="vTextField" maxlength="150" autofocus id="id_query" />
+                        
+                </div>
+            
+        </div>
+    
+      </fieldset>
+      <button type="submit">Go Crawl</button>
+      </form>
+  </div>
+  <div class="container">
+    <div class="alert alert-info text-center" role="alert">
+      Getting Started with Python on Heroku</a> tutorial.
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
+        
+      </div>
+      <div class="col-md-6">
+        <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
+        
+        
+      </div>
+    </div> <!-- row -->
+     <div class="alert alert-info text-center" role="alert">
+      Please do work through the Getting Started guide, even if you do know how to build such an 
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% endblock %}
