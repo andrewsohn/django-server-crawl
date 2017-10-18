@@ -10,8 +10,9 @@
 		var _defaults = {
 			content: '.content',
 			sform: '.settig-form',
-			doCrawlUrl: '/api/test/',
-			// doCrawlUrl: '/users',
+			// doCrawlUrl: '/api/test/',
+			getCrawlUrl: '/crawl/',
+			doCrawlUrl: '/crawl/save/',
 			autoplaySpeed: 2000,
 			speed: 2000,
 			fade: true
@@ -33,7 +34,25 @@
 				console.log(this.$sform)
 			},
 			_initProperties: function() {
+				var _this = this;
 
+				$.ajax({
+					url : _this._options.getCrawlUrl
+					, cache : false
+					, type : 'GET'
+					, data : {}
+					, contentType : "application/json; charset=utf-8"
+					, dataType: "json"
+					, beforeSend : function (xhr) {
+						xhr.setRequestHeader ("Accept", 'application/json; indent=4');
+						xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin:wlsrhkd2'));
+					}
+				}).fail(function() {
+					alert('데이터 통신 중 오류가 발생했습니다.');
+				}).done(function(result) {
+					if (!result) return;
+					console.log(result);
+				});
 			},
 			_attachEvents: function() {
 				this.$sform.submit(function(e) { e.preventDefault(); });
@@ -73,12 +92,20 @@
 
 				console.log(jsonData);
 
+				// jsonData['username'] = 'admin';
+				// jsonData['password'] = 'wlsrhkd2';
+
 				$.ajax({
 					url : _this._options.doCrawlUrl
 					, cache : false
-					, type : 'POST'
+					, type : 'GET'
 					, data : jsonData
-					, contentType : 'application/json'
+					, contentType : "application/json; charset=utf-8"
+					, dataType: "json"
+					, beforeSend : function (xhr) {
+						xhr.setRequestHeader ("Accept", 'application/json; indent=4');
+						xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin:wlsrhkd2'));
+					}
 				}).fail(function() {
 					alert('데이터 통신 중 오류가 발생했습니다.');
 				}).done(function(result) {

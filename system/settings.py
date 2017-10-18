@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'crawls.apps.CrawlsConfig',
     'app',
 ]
 
@@ -122,3 +123,26 @@ REST_FRAMEWORK = {
 }
 
 APPEND_SLASH = False
+
+CRAWL_SETTING = {
+    "INSTA_DOMAIN":"http://www.instagram.com",
+    "FACEBOOK_DOMAIN":"http://www.facebook.com",
+    "PHANTOMJS_PATH":"/Users/andrew/dev/GIT/GSCIT-insta-crawl-r/CRAWLER/node_modules/phantomjs/bin/phantomjs",
+    "DB_HOST":"localhost",
+    "DB_NAME":"SnsCrawley",
+    "DB_PORT":27017,
+    "HASHTAGS":[
+        "#기쁨",
+        "#슬픔",
+        "#즐거움",
+        "#화남",
+        "#우울"
+    ]
+}
+
+GO_CRAWL_CMD = "python3"
+CRAWL_PROJ_PATH = "{}/../".format(os.path.dirname(os.path.abspath(__file__)))
+# CRAWL_PROJ_PATH = "/Users/Andrew-MB/DEV/05.GIT/GSCIT-sns-sentiment/CRAWLER/"
+DIR_PREFIX = "{}/".format(os.path.dirname(os.path.abspath(__file__)))
+GO_CRAWL_IN_PATH = "{}gocrawl_in.py".format(CRAWL_PROJ_PATH)
+GO_CRAWL_FB_PATH = "{}gocrawl_fb.py".format(CRAWL_PROJ_PATH)

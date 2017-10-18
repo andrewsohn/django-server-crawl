@@ -1,0 +1,17 @@
+{
+  "name": "instacrawley",
+  "version": "1.0.0",
+  "description": "삐꾸데타 TF :: Pengtai Instagram Crawler === Python Application Pengtai Instagram Crawler presented by Pengtai Korea Corp. MTG Dev Team.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://andrewsohn@115.68.227.12:8060/andrewsohn/instaCrawley.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "phantomjs": "^2.1.7"
+  }
+}

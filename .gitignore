@@ -8,3 +8,13 @@ lib
 selenium
 __init__.py
 __pycache__
+.idea
+ghostdriver.log
+auth.json
+selenium
+logs
+img
+data
+node_modules
+geckodriver.log
+screenshot.png
