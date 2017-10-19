@@ -1,14 +1,12 @@
 from django.contrib.auth.models import User, Group
+from django.http import HttpResponseRedirect
 from rest_framework import viewsets, status
 from app.serializers import UserSerializer, GroupSerializer
 from django.shortcuts import render
-from django.http import HttpResponse
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
+from django.views import View
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .forms import CrawlForm
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -25,9 +23,21 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-def MainViewSet(request):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    form = CrawlForm()
-    return render(request, 'index.html', {'form': form})
+# def (request):
+#     """
+#     API endpoint that allows groups to be viewed or edited.
+#     """
+#
+#     return render(request, 'index.html', {'form': form})
+
+class MainView(View):
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        if not request.session.session_key:
+            return HttpResponseRedirect('/admin/')
+        # print(request.auth)
+
+        form = CrawlForm()
+        return render(request, 'index.html', {'form': form})

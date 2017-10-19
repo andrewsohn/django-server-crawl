@@ -44,7 +44,7 @@
 				this.$csvCont = this.$resultView.find(this._options.csvCont);
 				this.$eleCsv = this.$csvCont.find(this._options.elCsv);
 
-				console.log(this.$resultView)
+				// console.log(this.$resultView)
 			},
 			_initProperties: function() {
 				var _this = this;
@@ -105,7 +105,7 @@
 				}
 
 				_this.sFormData = jsonData;
-				console.log(jsonData);
+				// console.log(jsonData);
 
 				// jsonData['username'] = 'admin';
 				// jsonData['password'] = 'wlsrhkd2';
@@ -127,7 +127,7 @@
 					alert('데이터 통신 중 오류가 발생했습니다.');
 				}).done(function(result) {
 					if (!result) return;
-					console.log(result);
+					// console.log(result);
 
 				});
 
@@ -173,10 +173,10 @@
 					alert('데이터 통신 중 오류가 발생했습니다.');
 				}).done(function(result) {
 					if (!result) return;
-					console.log(result);
+					// console.log(result);
 					if(isFirst){
 						for(var i=0;i<result.log.lines.length;i++){
-							console.log(result.log.lines[i]);
+							// console.log(result.log.lines[i]);
 							_this.$eleMonitor.append(result.log.lines[i].text).show();
 						}
 					} else {
@@ -217,10 +217,10 @@
 					alert('데이터 통신 중 오류가 발생했습니다.');
 				}).done(function(result) {
 					if (!result) return;
-					console.log(result);
+					// console.log(result);
 					if(isFirst){
 						for(var i=0;i<result.csv.lines.length;i++){
-							console.log(result.csv.lines[i]);
+							// console.log(result.csv.lines[i]);
 							_this.$eleCsv.append(result.csv.lines[i].text).show();
 						}
 					} else {

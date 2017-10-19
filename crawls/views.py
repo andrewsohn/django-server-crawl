@@ -155,6 +155,8 @@ class CrawlMonitorView(APIView):
 
 class CrawlCSVDataView(APIView):
 	parser_classes = (JSONParser,)
+	authentication_classes = (SessionAuthentication, BasicAuthentication)
+	permission_classes = (IsAuthenticated,)
 
 	def get(self, request, format=None):
 

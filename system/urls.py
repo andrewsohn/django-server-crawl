@@ -1,3 +1,4 @@
+from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
 from rest_framework import routers
 from django.contrib import admin
@@ -23,8 +24,9 @@ urlpatterns = [
 urlpatterns = format_suffix_patterns(urlpatterns)
 
 urlpatterns.extend([
-	url(r'^$', views.MainViewSet, name='index'),
+	url(r'^$', views.MainView.as_view(), name='index'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^logout$', auth_views.logout, {'next_page' : '/admin/'}, name='logout'),
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ])
