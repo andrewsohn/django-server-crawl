@@ -1,12 +1,12 @@
 from django.conf import settings
 from rest_framework import status
-# from rest_framework.decorators import api_view
-from rest_framework.decorators import parser_classes
+
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 from rest_framework.views import APIView
 
 from rest_framework.response import Response
-from rest_framework.request import Request
-from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 import datetime
 import json
@@ -27,14 +27,20 @@ def csv_len(fname):
 
 class CrawlView(APIView):
 	parser_classes = (JSONParser,)
+	authentication_classes = (SessionAuthentication, BasicAuthentication)
+	permission_classes = (IsAuthenticated,)
 
 	def get(self, request, format=None):
+		# print(request.user)
+
 		crawls = Crawl.objects.all()
 		serializer = CrawlSerializer(crawls, many=True)
 		return Response(serializer.data)
 
 class CrawlSaveView(APIView):
 	parser_classes = (JSONParser,)
+	authentication_classes = (SessionAuthentication, BasicAuthentication)
+	permission_classes = (IsAuthenticated,)
 
 	def get(self, request, format=None):
 
@@ -109,6 +115,8 @@ class CrawlSaveView(APIView):
 
 class CrawlMonitorView(APIView):
 	parser_classes = (JSONParser,)
+	authentication_classes = (SessionAuthentication, BasicAuthentication)
+	permission_classes = (IsAuthenticated,)
 
 	def get(self, request, format=None):
 

@@ -60,7 +60,6 @@
 					, dataType: "json"
 					, beforeSend : function (xhr) {
 						xhr.setRequestHeader ("Accept", 'application/json; indent=4');
-						xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin:wlsrhkd2'));
 					}
 				}).fail(function() {
 					alert('데이터 통신 중 오류가 발생했습니다.');
@@ -120,7 +119,7 @@
 					, dataType: "json"
 					, beforeSend : function (xhr) {
 						xhr.setRequestHeader ("Accept", 'application/json; indent=4');
-						xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin:wlsrhkd2'));
+
 						_this.crawlStatus = true;
 						_this._visualizeMonitor();
 					}
@@ -167,7 +166,7 @@
 					, dataType: "json"
 					, beforeSend : function (xhr) {
 						xhr.setRequestHeader ("Accept", 'application/json; indent=4');
-						xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin:wlsrhkd2'));
+
 
 					}
 				}).fail(function() {
@@ -211,7 +210,7 @@
 					, dataType: "json"
 					, beforeSend : function (xhr) {
 						xhr.setRequestHeader ("Accept", 'application/json; indent=4');
-						xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin:wlsrhkd2'));
+
 
 					}
 				}).fail(function() {

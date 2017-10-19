@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework import routers
+from django.contrib import admin
+admin.autodiscover()
 from app import views
 from crawls import views as cviews
 from rest_framework.urlpatterns import format_suffix_patterns
@@ -22,6 +24,7 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 
 urlpatterns.extend([
 	url(r'^$', views.MainViewSet, name='index'),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ])
