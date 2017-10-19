@@ -13,6 +13,8 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
 	url(r'^crawl/$', cviews.CrawlView.as_view()),
     url(r'^crawl/save/$', cviews.CrawlSaveView.as_view()),
+    url(r'^crawl/monitor/log/$', cviews.CrawlMonitorView.as_view()),
+    url(r'^crawl/monitor/csvdata/$', cviews.CrawlCSVDataView.as_view()),
     # url(r'^crawl/(?P<pk>[0-9]+)$', cviews.crawl_detail),
 ]
 

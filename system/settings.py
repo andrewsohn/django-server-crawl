@@ -60,7 +60,7 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'quickstart/static'),
+    os.path.join(BASE_DIR, 'app/static'),
 ]
 
 WSGI_APPLICATION = 'system.wsgi.application'
@@ -141,8 +141,8 @@ CRAWL_SETTING = {
 }
 
 GO_CRAWL_CMD = "python3"
-CRAWL_PROJ_PATH = "{}/../".format(os.path.dirname(os.path.abspath(__file__)))
+CRAWL_PROJ_PATH = "{}/".format(BASE_DIR)
 # CRAWL_PROJ_PATH = "/Users/Andrew-MB/DEV/05.GIT/GSCIT-sns-sentiment/CRAWLER/"
-DIR_PREFIX = "{}/".format(os.path.dirname(os.path.abspath(__file__)))
+DIR_PREFIX = "{}/".format(BASE_DIR)
 GO_CRAWL_IN_PATH = "{}gocrawl_in.py".format(CRAWL_PROJ_PATH)
 GO_CRAWL_FB_PATH = "{}gocrawl_fb.py".format(CRAWL_PROJ_PATH)

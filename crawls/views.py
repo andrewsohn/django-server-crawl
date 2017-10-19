@@ -77,7 +77,7 @@ class CrawlSaveView(APIView):
 			DB_TOBE_CNT = DB_CNT + data.get('number')
 
 			while DB_TOBE_CNT > DB_CURRENT_CNT:
-				# print(args.crawl_type)
+
 				cmd_arr = [settings.GO_CRAWL_CMD, GO_CRAWL_PATH,
 						   '-d=' + csv_file_loc,
 						   '-t=' + data.get('crawl_type'),
@@ -86,13 +86,14 @@ class CrawlSaveView(APIView):
 						   '-s=' + setting_path,
 						   '-e=' + data.get('env')]
 
-				if data.get('query'):
+				if data.get('query') != "":
 					cmd_arr.append('-q={}'.format(data.get('query')))
-				# elif data.get('random'):
-				cmd_arr.append('-r')
+				elif data.get('random'):
+					cmd_arr.append('-r')
 
 				cmd_arr.append('-l')
 
+				print(cmd_arr)
 				# subprocess.call(cmd_arr)
 				# try:
 				call(cmd_arr)
@@ -106,7 +107,82 @@ class CrawlSaveView(APIView):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class CrawlMonitorView(APIView):
+	parser_classes = (JSONParser,)
 
+	def get(self, request, format=None):
+
+		data = request.query_params
+
+		now = datetime.datetime.now()
+		nowDate = now.strftime("%Y%m%d")
+
+
+		filename = 'logs/log-' + data.get('env') + '.' + nowDate + '.log'
+		filename = os.path.join(settings.DIR_PREFIX, filename)
+
+		lines = []
+		startNum = 0
+
+		if not data.get('startNum'):
+
+			with open(filename) as fp:
+				for i, line in enumerate(fp):
+					lines.append({'num':i,'text':line})
+		else:
+			startNum = int(data.get('startNum'))
+
+			with open(filename) as fp:
+				for i, line in enumerate(fp):
+					if i > startNum:
+						lines.append({'num': i, 'text': line})
+
+		endNum = len(lines) + startNum
+
+		return Response({'log':{
+			'startNum':startNum,
+			'endNum':endNum,
+			'lines':lines
+		}}, status=status.HTTP_200_OK)
+
+class CrawlCSVDataView(APIView):
+	parser_classes = (JSONParser,)
+
+	def get(self, request, format=None):
+
+		data = request.query_params
+
+		now = datetime.datetime.now()
+
+		csv_dir_prefix = '{}data'.format(settings.CRAWL_PROJ_PATH)
+		csv_filename = "{}-explore-{}".format(data.get('sns_kind'), now.strftime("%Y-%m-%d"))
+		csv_file_loc = os.path.join(csv_dir_prefix, "{}.csv".format(csv_filename))
+
+
+		lines = []
+		startNum = 0
+
+		if not data.get('startNum'):
+
+			with open(csv_file_loc) as fp:
+				for i, line in enumerate(fp):
+					lines.append({'num': i, 'text': line})
+		else:
+			startNum = int(data.get('startNum'))
+
+			with open(csv_file_loc) as fp:
+				for i, line in enumerate(fp):
+					if i > startNum:
+						lines.append({'num': i, 'text': line})
+
+		endNum = len(lines) + startNum
+
+		return Response({'csv': {
+			'startNum': startNum,
+			'endNum': endNum,
+			'lines': lines
+		}}, status=status.HTTP_200_OK)
+		# return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # def crawl_list(request, format=None):
 # 	"""
 # 	List all code snippets, or create a new snippet.
